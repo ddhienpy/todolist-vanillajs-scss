@@ -15,6 +15,11 @@ npm run compileSass
 ```
 
 ### Features
++ List of tasks
++ Add task
++ Update task
++ Delete task
++ Filter task
++ Change task status
 
 ![alt text](image.png)
-
