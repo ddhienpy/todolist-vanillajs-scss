@@ -1,0 +1,193 @@
+@use 'config' as *;
+@use 'mixin-vendors' as *;
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	background-color: $dark-color;
+	font-family: $main-font-family;
+	user-select: none;
+}
+
+li {
+	list-style: none;
+	@include border-radius(0.25rem);
+}
+
+header {
+	padding-block: 1em;
+	background-color: #222;
+	@include flexbox;
+	@include justify-content($value: center);
+	@include align-items($value: center);
+	color: $primary-color;
+	font-size: 2rem;
+}
+
+.container {
+	@include flexbox;
+	@include justify-content($value: center);
+	margin-top: 5em;
+}
+
+/* Add TODO container */
+.todo-form {
+	width: $form-width;
+	@include flexbox;
+	@include justify-content($value: space-between);
+}
+
+.add-container {
+	width: $container-width;
+	@include flexbox;
+}
+
+.add-todo-input {
+	width: 100%;
+	padding: .6em 1em;
+	border: 0;
+	outline: none;
+	font-size: 2rem;
+}
+
+.add-button {
+	background-color: $medium-color;
+	padding-inline: 2em;
+	border: 0;
+	cursor: pointer;
+	transition: all 0.2s ease;
+
+	&:hover {
+		background-color: $button-hover-color;
+	}
+
+	i {
+		font-size: 3rem;
+		color: $primary-color;
+		position: relative;
+		top: -2px;
+	}
+}
+
+/* filter TODO container */
+.todostate-container {
+	select {
+		height: 100%;
+		background-color: $secondary-color;
+		padding-inline: 1em;
+		border: 0;
+		@include border-radius(0.25rem);
+		cursor: pointer;
+	}
+}
+
+/* TODO List container */
+.task-container {
+	@include flexbox;
+	@include justify-content($value: center);
+	margin-block: 10em;
+
+	.todo-list {
+		width: $todo-list-width;
+		@include flexbox;
+		@include flex-direction($direction: column);
+		@include border-radius(0.25rem);
+
+		.todo-list-item {
+			width: 100%;
+			@include flexbox;
+			margin-block: 1em;
+
+			label {
+				flex: 1;
+				@include flexbox;
+				@include align-items($value: center);
+				background-color: $medium-color;
+				padding: 1em;
+				font-size: 1.5rem;
+				color: $primary-color;
+
+				[data-list-item-text] {
+					user-select: none;
+					margin-left: .6em;
+				}
+
+				[data-list-item-checkbox] {
+					&:checked {
+						~ [data-list-item-text] {
+							text-decoration: line-through;
+							color: $secondary-color-gray;
+							font-weight: bolder;
+						}
+					}
+				}
+
+				&:hover {
+					cursor: pointer;
+
+					[data-list-item-text] {
+						text-decoration: line-through;
+					}
+					[data-list-item-checkbox]:hover {
+						cursor: pointer;
+					}
+				}
+			}
+
+			.edit-input {
+				display: none;
+				background-color: $secondary-color-gray;
+				flex: 1;
+				padding: 1em;
+				border: 0;
+				outline: none;
+			}
+
+			.todo-state {
+				@include flexbox;
+			}
+
+			&.edit-state {
+				.edit-input {
+					display: inline;
+				}
+				label {
+					display: none;
+				}
+			}
+		}
+
+		button {
+			cursor: pointer;
+			border: .1em solid $button-border-color;
+			padding: 1em 1.2em;
+
+			&:hover {
+				background-color: $button-hover-color;
+			}
+		}
+
+		.complete-state {
+			opacity: 0.6;
+		}
+
+		.delete-state {
+			transform: translateY(10rem) rotateZ(30deg);
+			opacity: 0;
+			@include transition(0.3s, ease, 0s);
+		}
+	}
+}

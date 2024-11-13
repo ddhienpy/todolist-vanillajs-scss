@@ -1,0 +1,11 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "compileSass": "sass -w scss/main.scss css/main.css --style expanded"
+  },
+  "dependencies": {
+    "sass": "^1.43.5"
+  }
+}
